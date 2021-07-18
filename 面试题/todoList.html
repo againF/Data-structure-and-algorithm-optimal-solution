@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>todoList</title>
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>原问题</h1>
+    <img src="./img/todoList.png" alt="">
+    <h1>解答</h1>
+    <div class="gray-bg">
+        <div class="center-text">
+            todos
+        </div>
+        <div class="todo-wrap">
+            <div class="input-area">
+                <div class="down-arrow"></div>
+                <input type="text" class="input-todo" onkeydown="toAdd(event)">
+            </div>
+            <ul class="todo-list">
+
+            </ul>
+        </div>
+    </div>
+    <script>
+        var todos = [];
+        var ul = document.querySelector(".todo-list");
+
+        function render(val, ul) {
+            ul.innerHTML = "";
+            for (var i = 0; i < val.length; i++) {
+                ul.innerHTML += `
+               <li class="todo-item">
+                    <div class="key">${val[i]}</div>
+                    <div class="del-icon" onclick="del(${i})">X</div>
+                </li> 
+               `;
+            }
+        }
+
+        function del(index) {
+            todos.splice(index, 1)
+            render(todos, ul);
+        }
+
+        function add(val, ul) {
+            todos.push(val);
+            render(todos, ul);
+        }
+
+        function toAdd(e) {
+            if (e.keyCode === 13) {
+                add(e.target.value, ul);
+                document.querySelector(".input-todo").value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
